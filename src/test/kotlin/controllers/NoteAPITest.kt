@@ -85,5 +85,14 @@ class NoteAPITest {
             assertTrue(notesString.contains("swim"))
             assertTrue(notesString.contains("summer holiday"))
         }
+
+        @Test
+        fun listNotesBySelectedPriority(priority: Int): String {
+        }
+
+        @Test
+        fun numberOfNotesByPriority(): Int {
+            //helper method to determine how many notes there are of a specific priority
+        }
     }
 }
