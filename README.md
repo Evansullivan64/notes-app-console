@@ -11,6 +11,8 @@ this project allows anybody to create and store notes
 - Update any notes
 - Delete any note
 
+## JUnit
+- tests for listing all the notes
 
 ## Authors
 
