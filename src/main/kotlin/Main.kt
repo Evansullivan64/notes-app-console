@@ -63,7 +63,8 @@ fun listNotes(){
 }
 
 fun updateNote(){
-    logger.info { "updateNotes() function invoked" }
+    //logger.info { "updateNotes() function invoked" }
+
 }
 
 fun deleteNote(){

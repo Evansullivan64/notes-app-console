@@ -47,13 +47,12 @@ class NoteAPI {
 
 
         for (i in 0..notes.size-1){
-            if(notes[i].isNoteArchived.equals(false)){
-activeresults.add(notes[i])
+           var note:Note =  notes[i]
+            if(note.isNoteArchived == false){
+               activeresults.add(notes[i])
             }
         }
-        if (activeresults.isEmpty()) {
-            "no active notes"
-        }
+
         return activeresults.toString()
 
     }
@@ -66,14 +65,14 @@ activeresults.add(notes[i])
 
 
         for (i in 0..notes.size-1){
-            if(notes[i].isNoteArchived.equals(true)){
-                archivedresults.add(notes[i])
+            var note:Note =  notes[i]
+            if(note.isNoteArchived){
+                activeresults.add(notes[i])
             }
         }
-        if (archivedresults.isEmpty()) {
-            "no archived notes"
-        }
-        return archivedresults.toString()
+
+        return activeresults.toString()
+
 
     }
 
