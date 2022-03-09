@@ -85,4 +85,22 @@ class NoteAPI {
     fun numberOfActiveNotes(): Int {
        return activeresults.size
     }
+
+    fun listNotesBySelectedPriority(priority: Int): String {
+        var result = ArrayList<Note>()
+        for(note in notes){
+            if(note.notePriority.equals(priority)){
+                result.add(note)
+            }
+        }
+        return result.toString()
+    }
+
+    fun numberOfNotesByPriority(): Int {
+    for(priority:Int in 0..4){
+        if(){
+
+        }
+    }
+    }
 }

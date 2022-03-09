@@ -64,7 +64,8 @@ fun listNotes(){
 
 fun updateNote(){
     //logger.info { "updateNotes() function invoked" }
-
+println(noteAPI.listNotesBySelectedPriority(4))
+    println(noteAPI.numberOfNotesByPriority())
 }
 
 fun deleteNote(){
