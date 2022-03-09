@@ -38,4 +38,51 @@ class NoteAPI {
     fun isValidListIndex(index: Int, list: List<Any>): Boolean {
         return (index >= 0 && index < list.size)
     }
+
+
+
+
+    var activeresults = ArrayList<Note>()
+    fun listActiveNotes(): String {
+
+
+        for (i in 0..notes.size-1){
+           var note:Note =  notes[i]
+            if(note.isNoteArchived == false){
+               activeresults.add(notes[i])
+            }
+        }
+
+        return activeresults.toString()
+
+    }
+
+
+
+
+    var archivedresults = ArrayList<Note>()
+    fun listArchivedNotes(): String {
+
+
+        for (i in 0..notes.size-1){
+            var note:Note =  notes[i]
+            if(note.isNoteArchived){
+                activeresults.add(notes[i])
+            }
+        }
+
+        return activeresults.toString()
+
+
+    }
+
+
+
+    fun numberOfArchivedNotes(): Int {
+       return archivedresults.size
+    }
+
+    fun numberOfActiveNotes(): Int {
+       return activeresults.size
+    }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 class NoteAPITest {
 
@@ -84,6 +85,31 @@ class NoteAPITest {
             assertTrue(notesString.contains("test app"))
             assertTrue(notesString.contains("swim"))
             assertTrue(notesString.contains("summer holiday"))
+        }
+
+
+        @Test
+        fun `listing active notes returns false if isArchived set to true`(){
+            val notesString = populatedNotes!!.listAllNotes().lowercase()
+            assertTrue(notesString.contains("false"),"does not contain false")
+        }
+
+        @Test
+        fun `listing archived notes returns false if isArchived set to false`(){
+
+            val notesString = populatedNotes!!.listAllNotes().lowercase()
+            assertTrue(notesString.contains("true"),"does not contain true")
+        }
+
+        @Test
+        fun `counting active notes`(){
+           assertEquals(5, populatedNotes!!.numberOfActiveNotes())
+
+        }
+
+        @Test
+        fun `counting archived notes`(){
+            assertEquals(0, populatedNotes!!.numberOfArchivedNotes())
         }
     }
 }
