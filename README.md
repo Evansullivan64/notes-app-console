@@ -1,6 +1,6 @@
 # Notes app 
 
-this project allows anybody to create and store notes
+This project allows anybody to create and store notes
 
 
 
