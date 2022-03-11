@@ -111,5 +111,17 @@ class NoteAPITest {
         fun `counting archived notes`(){
             assertEquals(0, populatedNotes!!.numberOfArchivedNotes())
         }
+
+        @Test
+        fun `list notes by selected priotity`(){
+
+            assertTrue(populatedNotes!!.listNotesBySelectedPriority(1).contains("Summer Holiday to France"))
+            assertTrue(populatedNotes!!.listNotesBySelectedPriority(4).lowercase().contains("work"))
+        }
+
+        @Test
+        fun `return the number of notes by priority`(){
+            assertEquals(2,populatedNotes!!.numberOfNotesByPriority(4))
+        }
     }
 }
