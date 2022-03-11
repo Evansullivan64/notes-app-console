@@ -42,48 +42,59 @@ class NoteAPI {
 
 
 
-    var activeresults = ArrayList<Note>()
+   // var activeresults = ArrayList<Note>()
     fun listActiveNotes(): String {
 
 
-        for (i in 0..notes.size-1){
-           var note:Note =  notes[i]
-            if(note.isNoteArchived == false){
-               activeresults.add(notes[i])
-            }
-        }
+       return if (numberOfActiveNotes() == 0) {
+           "No active notes stored"
+       } else {
+           var listOfNotes = ""
+           for (i in notes.indices) {
+               if(!notes.get(i).isNoteArchived) {
 
-        return activeresults.toString()
+
+                   listOfNotes += "${i}: ${notes[i]} \n"
+               }
+           }
+           listOfNotes
+       }
+
+
+
+
+
+
 
     }
 
 
 
 
-    var archivedresults = ArrayList<Note>()
+
     fun listArchivedNotes(): String {
+        return if (numberOfArchivedNotes() == 0) {
+            "No archived notes stored"
+        } else {
+            var listOfNotes = ""
+            for (i in notes.indices) {
+                if(notes.get(i).isNoteArchived) {
 
-
-        for (i in 0..notes.size-1){
-            var note:Note =  notes[i]
-            if(note.isNoteArchived){
-                activeresults.add(notes[i])
+                    listOfNotes += "${i}: ${notes[i]} \n"
+                }
             }
+            listOfNotes
         }
-
-        return activeresults.toString()
-
-
     }
 
 
 
     fun numberOfArchivedNotes(): Int {
-       return archivedresults.size
+       return  listArchivedNotes().length
     }
 
     fun numberOfActiveNotes(): Int {
-       return activeresults.size
+       return listActiveNotes().length
     }
 
     fun listNotesBySelectedPriority(priority: Int): String {
@@ -96,11 +107,8 @@ class NoteAPI {
         return result.toString()
     }
 
-    fun numberOfNotesByPriority(): Int {
-    for(priority:Int in 0..4){
-        if(){
+    fun numberOfNotesByPriority(priority:Int): Int {
 
-        }
-    }
+        return listNotesBySelectedPriority(priority).length
     }
 }
