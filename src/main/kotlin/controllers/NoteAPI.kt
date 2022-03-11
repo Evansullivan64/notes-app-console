@@ -43,72 +43,81 @@ class NoteAPI {
 
 
    // var activeresults = ArrayList<Note>()
-    fun listActiveNotes(): String {
-
-
+   fun listActiveNotes(): String {
        return if (numberOfActiveNotes() == 0) {
            "No active notes stored"
        } else {
-           var listOfNotes = ""
-           for (i in notes.indices) {
-               if(!notes.get(i).isNoteArchived) {
-
-
-                   listOfNotes += "${i}: ${notes[i]} \n"
+           var listOfActiveNotes = ""
+           for (note in notes) {
+               if (!note.isNoteArchived) {
+                   listOfActiveNotes += "${notes.indexOf(note)}: $note \n"
                }
            }
-           listOfNotes
+           listOfActiveNotes
        }
-
-
-
-
-
-
-
-    }
-
-
-
-
+   }
 
     fun listArchivedNotes(): String {
         return if (numberOfArchivedNotes() == 0) {
             "No archived notes stored"
         } else {
-            var listOfNotes = ""
-            for (i in notes.indices) {
-                if(notes.get(i).isNoteArchived) {
-
-                    listOfNotes += "${i}: ${notes[i]} \n"
+            var listOfArchivedNotes = ""
+            for (note in notes) {
+                if (note.isNoteArchived) {
+                    listOfArchivedNotes += "${notes.indexOf(note)}: $note \n"
                 }
             }
-            listOfNotes
+            listOfArchivedNotes
         }
     }
 
-
-
     fun numberOfArchivedNotes(): Int {
-       return  listArchivedNotes().length
+        var counter = 0
+        for (note in notes) {
+            if (note.isNoteArchived) {
+                counter++
+            }
+        }
+        return counter
     }
 
     fun numberOfActiveNotes(): Int {
-       return listActiveNotes().length
+        var counter = 0
+        for (note in notes) {
+            if (!note.isNoteArchived) {
+                counter++
+            }
+        }
+        return counter
     }
 
     fun listNotesBySelectedPriority(priority: Int): String {
-        var result = ArrayList<Note>()
-        for(note in notes){
-            if(note.notePriority.equals(priority)){
-                result.add(note)
+        return if (notes.isEmpty()) {
+            "No notes stored"
+        } else {
+            var listOfNotes = ""
+            for (i in notes.indices) {
+                if (notes[i].notePriority == priority) {
+                    listOfNotes +=
+                        """$i: ${notes[i]}
+                        """.trimIndent()
+                }
+            }
+            if (listOfNotes.equals("")) {
+                "No notes with priority: $priority"
+            } else {
+                "${numberOfNotesByPriority(priority)} notes with priority $priority: $listOfNotes"
             }
         }
-        return result.toString()
     }
 
-    fun numberOfNotesByPriority(priority:Int): Int {
-
-        return listNotesBySelectedPriority(priority).length
+    fun numberOfNotesByPriority(priority: Int): Int {
+        var counter = 0
+        for (note in notes) {
+            if (note.notePriority == priority) {
+                counter++
+            }
+        }
+        return counter
     }
 }
