@@ -11,6 +11,12 @@ class NoteAPI {
         return notes.add(note)
     }
 
+    fun deleteNote(indexToDelete: Int): Note? {
+        return if (isValidListIndex(indexToDelete, notes)) {
+            notes.removeAt(indexToDelete)
+        } else null
+    }
+
 
     fun listAllNotes(): String {
         return if (notes.isEmpty()) {
@@ -42,7 +48,7 @@ class NoteAPI {
 
 
 
-   // var activeresults = ArrayList<Note>()
+
    fun listActiveNotes(): String {
        return if (numberOfActiveNotes() == 0) {
            "No active notes stored"
