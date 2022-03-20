@@ -20,6 +20,7 @@ fun main(args: Array<String>) {
 fun runMenu() {
     do {
         val option = mainMenu()
+
         when (option) {
             1  -> addNote()
             2  -> listNotes()
@@ -34,12 +35,22 @@ fun runMenu() {
     } while (true)
 }
 
+
+
+
 fun mainMenu() : Int {
     return ScannerInput.readNextInt(""" 
          > ----------------------------------
-         > |        NOTE KEEPER APP         |
+         > | _               ___               
+| \ | |     | |             / _ \              
+|  \| | ___ | |_ ___  ___  / /_\ \_ __  _ __   
+| . ` |/ _ \| __/ _ \/ __| |  _  | '_ \| '_ \  
+| |\  | (_) | ||  __/\__ \ | | | | |_) | |_) | 
+\_| \_/\___/ \__\___||___/ \_| |_/ .__/| .__/  
+                                 | |   | |     
+                                 |_|   |_|            
          > ----------------------------------
-         > | NOTE MENU                      |
+         > |                                |
          > |   1) Add a note                |
          > |   2) List all notes            |
          > |   3) Update a note             |
@@ -51,6 +62,47 @@ fun mainMenu() : Int {
          > |   0) Exit                      |
          > ----------------------------------
          > ==>> """.trimMargin(">"))
+
+
+}
+
+fun listNotes() {
+    if (noteAPI.numberOfNotes() > 0) {
+    val option = readNextInt(""" 
+         > ----------------------------------
+            > _     _     _     _   _       _             
+            >| |   (_)   | |   | \ | |     | |            
+            >| |    _ ___| |_  |  \| | ___ | |_ ___  ___  
+            >| |   | / __| __| | . ` |/ _ \| __/ _ \/ __| 
+            >| |___| \__ \ |_  | |\  | (_) | ||  __/\__ \ 
+            >\_____/_|___/\__| \_| \_/\___/ \__\___||___/ 
+                                                      
+         > ----------------------------------
+         > |   1) List all notes            |
+         > |   2) List active notes         |
+         > |   3) List archived note        |
+         > ----------------------------------
+         > |   0) Exit                      |
+         > ----------------------------------
+         > ==>> """.trimMargin(">"))
+    when(option){
+        1-> listAllNotes()
+        2 -> listActiveNotes()
+        3-> listArchivedNotes()
+        else -> println("Invalid option entered: $option");
+    }
+} else {
+    println("Option Invalid - No notes stored");
+}
+
+}
+
+ fun listActiveNotes(){
+    println(noteAPI.listActiveNotes())
+}
+
+fun listArchivedNotes(){
+    println(noteAPI.listArchivedNotes())
 }
 
 fun addNote(){
@@ -67,13 +119,13 @@ fun addNote(){
     }
 }
 
-fun listNotes(){
+fun listAllNotes(){
 
     println(noteAPI.listAllNotes())
 }
 
 fun archiveNotes(){
-    listNotes()
+    listAllNotes()
 
     if(noteAPI.numberOfNotes()> 0){
         val indextoArchive = readNextInt("enter a note to archive")
@@ -88,7 +140,7 @@ fun archiveNotes(){
 }
 
 fun updateNote(){
-    listNotes()
+    listAllNotes()
     if (noteAPI.numberOfNotes() > 0) {
         //only ask the user to choose the note if notes exist
         val indexToUpdate = readNextInt("Enter the index of the note to update: ")
@@ -111,7 +163,7 @@ fun updateNote(){
 }
 
 fun deleteNote(){
-    listNotes()
+    listAllNotes()
     if (noteAPI.numberOfNotes() > 0) {
         //only ask the user to choose the note to delete if notes exist
         val indexToDelete = readNextInt("Enter the index of the note to delete: ")
