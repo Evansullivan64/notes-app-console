@@ -150,6 +150,18 @@ class NoteAPI(serializerType: Serializer){
         return counter
     }
 
+
+    fun archiveNote(noteToArchive: Int): Boolean {
+        if (isValidIndex(noteToArchive)) {
+            val noteToArchive = notes[noteToArchive]
+            if (!noteToArchive.isNoteArchived) {
+                noteToArchive.isNoteArchived = true
+                return true
+            }
+        }
+        return false
+    }
+
     @Throws(Exception::class)
     fun load() {
         notes = serializer.read() as ArrayList<Note>
