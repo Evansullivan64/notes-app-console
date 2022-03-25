@@ -54,7 +54,7 @@ fun mainMenu() : Int {
          > ----------------------------------
          > |                                |
          > |   1) Add a note                |
-         > |   2) List all notes            |
+         > |   2) List all notes methods    |
          > |   3) Update a note             |
          > |   4) Delete a note             |
          > |   5) Archive a note            |
@@ -83,6 +83,7 @@ fun listNotes() {
          > |   1) List all notes            |
          > |   2) List active notes         |
          > |   3) List archived note        |
+         > |   4) Search Note by title      |
          > ----------------------------------
          > |   0) Exit                      |
          > ----------------------------------
@@ -91,6 +92,7 @@ fun listNotes() {
         1-> listAllNotes()
         2 -> listActiveNotes()
         3-> listArchivedNotes()
+        4 -> searchNotes()
         else -> println("Invalid option entered: $option");
     }
 } else {
