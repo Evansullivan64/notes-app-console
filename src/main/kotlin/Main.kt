@@ -179,6 +179,16 @@ fun deleteNote(){
     }
 }
 
+fun searchNotes() {
+    val searchTitle = readNextLine("Enter the description to search by: ")
+    val searchResults = noteAPI.searchByTitle(searchTitle)
+    if (searchResults.isEmpty()) {
+        println("No notes found")
+    } else {
+        println(searchResults)
+    }
+}
+
 
 
 fun save() {
