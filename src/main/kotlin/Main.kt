@@ -32,7 +32,7 @@ fun runMenu() {
             6 -> load()
             7 -> save()
             0  -> exitApp()
-            else -> System.out.println("Invalid option entered: ${option}")
+            else -> System.out.println("Invalid  option entered: ${option}")
         }
     } while (true)
 }
