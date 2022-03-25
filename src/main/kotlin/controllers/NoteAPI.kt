@@ -64,36 +64,18 @@ class NoteAPI(serializerType: Serializer){
     }
 
 
+    fun listActiveNotes(): String =
+        if(numberOfActiveNotes() == 0) "no active notes stored"
+        else notes.filter {note: Note -> !note.isNoteArchived }
+    .joinToString (separator = "\n"){ note ->  notes.indexOf(note).toString()+": "+ note.toString() }
 
 
+    fun listArchivedNotes(): String =
+        if(numberOfArchivedNotes() == 0) "no active notes stored"
+        else notes.filter {note: Note -> note.isNoteArchived }
+            .joinToString (separator = "\n"){ note ->  notes.indexOf(note).toString()+": "+ note.toString() }
 
-   fun listActiveNotes(): String {
-       return if (numberOfActiveNotes() == 0) {
-           "No active notes stored"
-       } else {
-           var listOfActiveNotes = ""
-           for (note in notes) {
-               if (!note.isNoteArchived) {
-                   listOfActiveNotes += "${notes.indexOf(note)}: $note \n"
-               }
-           }
-           listOfActiveNotes
-       }
-   }
 
-    fun listArchivedNotes(): String {
-        return if (numberOfArchivedNotes() == 0) {
-            "No archived notes stored"
-        } else {
-            var listOfArchivedNotes = ""
-            for (note in notes) {
-                if (note.isNoteArchived) {
-                    listOfArchivedNotes += "${notes.indexOf(note)}: $note \n"
-                }
-            }
-            listOfArchivedNotes
-        }
-    }
 
     fun numberOfArchivedNotes(): Int {
         return notes.stream()
@@ -128,6 +110,13 @@ class NoteAPI(serializerType: Serializer){
             }
         }
     }
+
+/*
+    fun listNotesBySelectedPriority(priority: Int): String =
+        if(notes.isEmpty()) "no notes stored"
+    else notes.filter { note: Note -> notes[priority].notePriority == priority}
+            .joinToString (separator = "\n"){ note -> notes.indexOf(note).toString()+": "+note.toString() }
+    */
 
     fun numberOfNotesByPriority(priority: Int): Int {
 
