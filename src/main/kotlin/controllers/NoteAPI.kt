@@ -66,7 +66,7 @@ class NoteAPI(serializerType: Serializer){
     }
 
     fun listnoteswithletter( letter:String): String =
-        if  (numberOfActiveNotes() == 0)  "No active notes stored"
+        if  (numberOfNotes() == 0)  "No notes stored"
     else formatListString(notes.filter { note -> note.noteTitle.startsWith(letter) })
 
 
@@ -80,6 +80,9 @@ class NoteAPI(serializerType: Serializer){
         if  (numberOfArchivedNotes() == 0) "No archived notes stored"
         else formatListString(notes.filter { note -> note.isNoteArchived})
 
+    fun numberofnoteswithletter(letter: String)=
+    notes.filter { note -> note.noteTitle.startsWith(letter) }
+    .count()
 
 
     fun numberOfArchivedNotes(): Int = notes
