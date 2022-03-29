@@ -65,6 +65,12 @@ class NoteAPI(serializerType: Serializer){
         return isValidListIndex(index, notes);
     }
 
+    fun listnoteswithletter( letter:String): String =
+        if  (numberOfActiveNotes() == 0)  "No active notes stored"
+    else formatListString(notes.filter { note -> note.noteTitle.startsWith(letter) })
+
+
+
 
     fun listActiveNotes(): String =
         if  (numberOfActiveNotes() == 0)  "No active notes stored"
