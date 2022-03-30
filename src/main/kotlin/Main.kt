@@ -83,7 +83,8 @@ fun listNotes() {
          > |   1) List all notes            |
          > |   2) List active notes         |
          > |   3) List archived note        |
-         > |   4) Search Note by title      |
+         > |   4) List note starting with   |
+         > |   5) Search Note by title      |
          > ----------------------------------
          > |   0) Exit                      |
          > ----------------------------------
@@ -92,7 +93,8 @@ fun listNotes() {
         1-> listAllNotes()
         2 -> listActiveNotes()
         3-> listArchivedNotes()
-        4 -> searchNotes()
+        4 -> listNoteWithLetter()
+        5 -> searchNotes()
         else -> println("Invalid option entered: $option");
     }
 } else {
@@ -107,6 +109,11 @@ fun listNotes() {
 
 fun listArchivedNotes(){
     println(noteAPI.listArchivedNotes())
+}
+
+fun listNoteWithLetter(){
+    val letter: String = readNextLine("Enter a letter")
+    println(noteAPI.listnoteswithletter(letter))
 }
 
 fun addNote(){

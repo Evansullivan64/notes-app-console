@@ -76,6 +76,23 @@ class NoteAPITest {
     inner class ListNotes {
 
         @Test
+        fun `listNotesbyLetter returns No Notes Stored message when ArrayList is empty`() {
+            assertEquals(0, emptyNotes!!.numberOfNotes())
+            assertTrue(emptyNotes!!.listnoteswithletter("a").lowercase().contains("no notes"))
+        }
+
+        @Test
+        fun `listNotesbyLetter returns Notes when ArrayList has notes stored`() {
+            assertEquals(5, populatedNotes!!.numberOfNotes())
+            val notesString = populatedNotes!!.listnoteswithletter("s").lowercase()
+            assertFalse(notesString.contains("learning kotlin"))
+            assertFalse(notesString.contains("code app"))
+            assertFalse(notesString.contains("test app"))
+            assertTrue(notesString.contains("swim"))
+            assertTrue(notesString.contains("summer holiday"))
+        }
+
+        @Test
         fun `listAllNotes returns No Notes Stored message when ArrayList is empty`() {
             assertEquals(0, emptyNotes!!.numberOfNotes())
             assertTrue(emptyNotes!!.listAllNotes().lowercase().contains("no notes"))
