@@ -2,6 +2,7 @@ package controllers
 
 import models.Note
 import persistence.Serializer
+import utils.utils
 
 class NoteAPI(serializerType: Serializer){
 
@@ -15,7 +16,7 @@ class NoteAPI(serializerType: Serializer){
     }
 
     fun deleteNote(indexToDelete: Int): Note? {
-        return if (isValidListIndex(indexToDelete, notes)) {
+        return if (utils.isValidListIndex(indexToDelete, notes)) {
             notes.removeAt(indexToDelete)
         } else null
     }
@@ -51,18 +52,16 @@ class NoteAPI(serializerType: Serializer){
     }
 
     fun findNote(index: Int): Note? {
-        return if (isValidListIndex(index, notes)) {
+        return if (utils.isValidListIndex(index, notes)) {
             notes[index]
         } else null
     }
 
     //utility method to determine if an index is valid in a list.
-    fun isValidListIndex(index: Int, list: List<Any>): Boolean {
-        return (index >= 0 && index < list.size)
-    }
+
 
     fun isValidIndex(index: Int) :Boolean{
-        return isValidListIndex(index, notes);
+        return utils.isValidListIndex(index, notes);
     }
 
     fun listnoteswithletter( letter:String): String =

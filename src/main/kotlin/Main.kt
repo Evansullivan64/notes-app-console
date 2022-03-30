@@ -7,6 +7,10 @@ import persistence.YAMLSerializer
 import utils.ScannerInput
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
+import utils.utils
+import utils.utils.isValidCategory
+import utils.utils.isValidStatus
+import utils.utils.validpriority
 import java.io.File
 import java.lang.System.exit
 
@@ -119,8 +123,22 @@ fun listNoteWithLetter(){
 fun addNote(){
     //logger.info { "addNote() function invoked" }
     val noteTitle = readNextLine("Enter a title for the note: ")
-    val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
-    val noteCategory = readNextLine("Enter a category for the note: ")
+    var notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+    while(!validpriority(notePriority)){
+        notePriority = readNextInt("Value not in range, Enter a priority (1-low, 2, 3, 4, 5-high): ")
+    }
+    var noteCategory = readNextLine("Enter a category for the note: ")
+    while(!isValidCategory(noteCategory)){
+        noteCategory = readNextLine(""" 
+           > |    Categories:
+           > | Home:
+           > | Reminder:
+           > | behaviour:
+           > | music:
+           > | art:
+           > | Enter a category for the note:
+        """.trimMargin(">"))
+    }
     val status = "ToDo"
     val isAdded = noteAPI.add(Note(noteTitle, notePriority, noteCategory, false,status))
 
@@ -158,9 +176,26 @@ fun updateNote(){
         val indexToUpdate = readNextInt("Enter the index of the note to update: ")
         if (noteAPI.isValidIndex(indexToUpdate)) {
             val noteTitle = readNextLine("Enter a title for the note: ")
-            val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
-            val noteCategory = readNextLine("Enter a category for the note: ")
+            var notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+            while(!validpriority(notePriority)){
+                notePriority = readNextInt("Value not in range, Enter a priority (1-low, 2, 3, 4, 5-high): ")
+            }
+            var noteCategory = readNextLine("Enter a category for the note: ")
+            while(!isValidCategory(noteCategory)){
+                noteCategory = readNextLine(""" 
+           > |    Categories:
+           > | Home:
+           > | Reminder:
+           > | behaviour:
+           > | music:
+           > | art:
+           > | Enter a category for the note:
+        """.trimMargin(">"))
+            }
             var status = readNextLine("Enter a status (Todo or Done) for the note: ")
+            while (!isValidStatus(status)){
+                status = readNextLine("Enter a status (Todo or Done) for the note: ")
+            }
 
 
 
